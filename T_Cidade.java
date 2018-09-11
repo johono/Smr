@@ -73,7 +73,7 @@ public class T_Cidade {
             this.tarefas.AbreConexao();
             String sql;
             if(teste ==1){
-                sql = "select * from tb_cidade where nome_cidade ='"+cidade+"' or cod_cidade ='"+cidade+"'";
+                sql = "select * from tb_cidades where nome_cidade ='"+cidade+"' or cod_cidade ='"+cidade+"'";
             } else {
                 if(teste == 2){
                     sql = "select * from tb_cidades where cod_cidade > '"+cidade+"'";
@@ -97,7 +97,7 @@ public class T_Cidade {
         try {
             if (!"00000".equals(cod_cidade)) {
                 this.tarefas.AbreConexao();
-                String sql = "delete from tb_cidade where cod_cidade = '" + cod_cidade + "'";
+                String sql = "delete from tb_cidades where cod_cidade = '" + cod_cidade + "'";
                 int rs = this.tarefas.getSt().executeUpdate(sql);
                 this.tarefas.FechaConexao();
                 JOptionPane.showMessageDialog(null, "CIDADE EXCLUIDA COM SUCESSO", "Informacao", 1);

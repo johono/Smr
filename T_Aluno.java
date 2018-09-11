@@ -94,12 +94,12 @@ public class T_Aluno {
             this.tarefas.AbreConexao();
             String sql;
             if(teste == 1){
-                sql = "select * from vw_alunos where nom_aluno ='"+aluno+"' or cod_aluno='"+aluno+"'";
+                sql = "select * from vw_alunos where NOM_ALUNO ='"+aluno+"' or COD_ALUNO='"+aluno+"'";
             }else {
                 if(teste == 2){
-                    sql = "select * from vw_alunos where cod_aluno >"+aluno+"'";
+                    sql = "select * from vw_alunos where COD_ALUNO >"+aluno+"'";
                 } else {
-                    sql = "select * from vw_alunos where cod_aluno <"+aluno+"'";
+                    sql = "select * from vw_alunos where COD_ALUNO <"+aluno+"'";
                 }
                 return this.tarefas.getSt().executeQuery(sql);
             }

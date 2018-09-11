@@ -52,7 +52,7 @@ public class T_Usuarios {
     public void Alterar_Usuario(String usuario, String senha, String confirma, int privilegio){
         try {
             this.t.AbreConexao();
-            String sql = "update tb_usuario set senha = '"+senha+"', permicoes = '"+privilegio+"' where login = '"+usuario+"'";
+            String sql = "update tb_usuarios set senha = '"+senha+"', permicoes = '"+privilegio+"' where login = '"+usuario+"'";
             int rs = this.t.getSt().executeUpdate(sql);
             sql = "revoke all on *.* from '" + usuario +"'@'%'";
             rs = this.t.getSt().executeUpdate(sql);
@@ -77,7 +77,7 @@ public class T_Usuarios {
     public ResultSet Ler_Usuario(String usuario) {
         try {
             this.t.AbreConexao();
-            String sql = "select * from tb_usuario where login = '"+usuario+"'";
+            String sql = "select * from tb_usuarios where login = '"+usuario+"'";
             return this.t.getSt().executeQuery(sql);
         } catch (IOException | SQLException ex) {
             JOptionPane.showMessageDialog(null, "NENHUM REGISTRO ENCONTRADO.", "Informacao", 1);
@@ -88,7 +88,7 @@ public class T_Usuarios {
     public ResultSet Ler_Usuario(String usuario, String senha) {
         try {
             this.t.AbreConexao();
-            String sql = "select * from tb_usuario where login = '"+usuario+"' and senha ='"+senha+"'";
+            String sql = "select * from tb_usuarios where login = '"+usuario+"' and senha ='"+senha+"'";
             return this.t.getSt().executeQuery(sql);
         } catch (IOException | SQLException ex) {
             JOptionPane.showMessageDialog(null, "NENHUM REGISTRO ENCONTRADO.", "Informacao", 1);
@@ -102,7 +102,7 @@ public class T_Usuarios {
             this.t.AbreConexao();
             ResultSet rs = Ler_Usuario(usuario);
             if(rs.first()){
-                String sql1 = "delete from tb_usuario where login ='"+usuario+"'";
+                String sql1 = "delete from tb_usuarios where login ='"+usuario+"'";
                 String sql2 = "drop user '"+usuario+"'";
                 int rs1 = this.t.getSt().executeUpdate(sql1);
                 int rs2 = this.t.getSt().executeUpdate(sql2);
