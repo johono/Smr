@@ -63,19 +63,12 @@ public class T_UndEnsino {
         return null;
     }
     
-    public ResultSet Ler_UndEnsino(String und, int teste){
+    public ResultSet Ler_UndEnsino(String und){
         try {
             this.tarefas.AbreConexao();
             String sql;
-            if(teste == 1){
-                sql = "select * from tb_undensino where nome_und = '"+und+"' or cod_und = '"+und+"'";}
-            else
-            {
-                if(teste ==2){
-                    sql = "select * from tb_undensino where cod_und > '"+und+"'";
-                } else
-                    sql = "select * from tb_undensino where cod_und < '"+und+"'";
-            }
+                sql = "select * from tb_undensino where nome_und = '"+und+"' or cod_und = '"+und+"'";
+        
             return this.tarefas.getSt().executeQuery(sql);
         } catch (IOException | SQLException ex) {
             JOptionPane.showMessageDialog(null, "NENHUM REGISTRO ENCONTRADO", "Informacao", 1);

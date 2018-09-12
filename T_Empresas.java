@@ -56,20 +56,13 @@ public class T_Empresas {
         this.tar.FechaConexao();
         return null;
     }
-    public ResultSet Ler_Empresa(String empresa, int teste){    
+    public ResultSet Ler_Empresa(String empresa){    
         try {
             this.tar.AbreConexao();
             String sql;
-            if(teste == 1){
                 sql = "select * from tb_empresas where razao_empresa = '"+empresa+"' or cod_empresa ='" +empresa+ "' or cnpj_empresa ='" +empresa + "'";
-            } else {
-                if(teste == 2){
-                    sql = "select * from tb_empresas where cod_empresa >'"+empresa+"'";
-                } else {
-                    sql = "select * from tb_empresas where cod_empresa <'"+empresa+"'";
-                }
+          
                 return this.tar.getSt().executeQuery(sql);
-            }
         } catch (IOException | SQLException ex) {
             JOptionPane.showMessageDialog(null, "NENHUM REGISTRO ENCONTRADO", "Informacao", 1);
         }

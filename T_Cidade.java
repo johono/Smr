@@ -68,20 +68,15 @@ public class T_Cidade {
         return null;
     }
     
-    public ResultSet Ler_Cidade(String cidade, int teste){
+    public ResultSet Ler_Cidade(String cidade){
         try {
             this.tarefas.AbreConexao();
             String sql;
-            if(teste ==1){
+            
                 sql = "select * from tb_cidades where nome_cidade ='"+cidade+"' or cod_cidade ='"+cidade+"'";
-            } else {
-                if(teste == 2){
-                    sql = "select * from tb_cidades where cod_cidade > '"+cidade+"'";
-                } else {
-                    sql = "select * from tb_cidades where cod_cidade < '"+cidade+"'";
-                }
+           
                 return this.tarefas.getSt().executeQuery(sql);
-            }
+            
         } catch (IOException | SQLException ex) {
             JOptionPane.showMessageDialog(null, "NENHUM REGISTRO ENCONTRADO", "Informacao", 1);
         }

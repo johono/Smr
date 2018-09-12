@@ -72,20 +72,13 @@ public class T_Curso {
         return null;
     }
 
-    public ResultSet Ler_Curso(String curso, int teste) {
+    public ResultSet Ler_Curso(String curso) {
         try {
             this.tarefas.AbreConexao();
             String sql;
-            if (teste == 1) {
                 sql = "select * from tb_curso where nome_curso ='" + curso + "' or cod_curso ='" + curso + "'";
-            } else {
-                if (teste == 2) {
-                    sql = "select * from tb_cursos where cod_curso > '" + curso + "'";
-                } else {
-                    sql = "select * from tb_cursos where cod_curso < '" + curso + "'";
-                }
+            
                 return this.tarefas.getSt().executeQuery(sql);
-            }
         } catch (IOException | SQLException ex) {
             JOptionPane.showMessageDialog(null, "NENHUM REGISTRO ENCONTRADO", "Informacao", 1);
         }
