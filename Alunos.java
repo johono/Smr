@@ -135,7 +135,7 @@ public class Alunos extends javax.swing.JFrame {
           this.cbAluno.addItem(rs.getString("NOM_ALUNO"));
         }
       }
-      this.cbAluno.addItem("");
+      
       
       if ("0".equals(Rotinas.Parametros.getCod_aluno())){
         this.jPesquisa.setText("");
@@ -150,15 +150,16 @@ public class Alunos extends javax.swing.JFrame {
         this.jValor_ext.setText("");
         this.jPai.setText("");
         this.jMae.setText("");
-        this.jDt_Vig.setText(getDate());
-        this.jDt_Cad.setText("");
+        this.jDt_Vig.setText("");
+        this.jDt_Cad.setText(getDate());
         this.cbCidade.setSelectedIndex(0);
         this.cbUnd.setSelectedIndex(0);
         this.cbEmpresa.setSelectedIndex(0);
         this.cbCurso.setSelectedIndex(0);
       }else{
-        rs = this.taluno.Ler_Aluno(Rotinas.Parametros.getCod_aluno(), 1);
+        rs = this.taluno.Ler_Aluno(Rotinas.Parametros.getCod_aluno());
         if (rs != null){
+            
           rs.first();
           this.jCod.setText(rs.getString("COD_ALUNO"));
           this.jNome.setText(rs.getString("NOM_ALUNO"));
@@ -171,8 +172,8 @@ public class Alunos extends javax.swing.JFrame {
           this.jValor_ext.setText(rs.getString("PRECO_EXTENSO"));
           this.jPai.setText(rs.getString("NOME_PAI"));
           this.jMae.setText(rs.getString("NOME_MAE"));
-          this.jDt_Vig.setText(this.cons.dataexibe(rs.getString("DATA_CAD")));
-          this.jDt_Cad.setText(this.cons.dataexibe(rs.getString("DATA_FIM")));
+          this.jDt_Cad.setText(this.cons.dataexibe(rs.getString("DATA_CAD")));
+          this.jDt_Vig.setText(this.cons.dataexibe(rs.getString("DATA_FIM")));
           Atualiza_Cidade(rs.getString("COD_CIDADE"));
           Atualiza_Und(rs.getString("COD_UND"));
           Atualiza_Empresa(rs.getString("COD_EMPRESA"));
@@ -181,6 +182,8 @@ public class Alunos extends javax.swing.JFrame {
       }
     }catch (SQLException ex){
       Logger.getLogger(Alunos.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+      //JOptionPane.showMessageDialog(null, "ERRO NO LER_ALUNO", "Informacao", 1);
+              
     }
   }
     
@@ -189,12 +192,24 @@ public class Alunos extends javax.swing.JFrame {
      */
     public Alunos() {
         initComponents();
-        Atualiza_Aluno();
         Atualiza_Cidade("0");
         Atualiza_Curso("0");
         Atualiza_Empresa("0");
         Atualiza_Und("0");
-        
+        //Atualiza_Aluno();
+        try {
+            this.cbAluno.removeAllItems();
+            ResultSet rs = this.taluno.Ler_Aluno();
+            if (rs.next()) {
+                rs.previous();
+                while (rs.next()) {
+                    this.cbAluno.addItem(rs.getString("NOM_ALUNO"));
+                }
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(Alunos.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        }
+
     }
 
     /**
@@ -258,11 +273,18 @@ public class Alunos extends javax.swing.JFrame {
         btExcluir = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setResizable(false);
 
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
+        jPanel1.setAutoscrolls(true);
 
         btPesq_Av.setText("Pesquisa Avançada");
         btPesq_Av.setNextFocusableComponent(cbAluno);
+        btPesq_Av.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btPesq_AvActionPerformed(evt);
+            }
+        });
 
         jLabel1.setText("Nome:");
 
@@ -314,6 +336,11 @@ public class Alunos extends javax.swing.JFrame {
         jObs.setNextFocusableComponent(jValor);
 
         jValor.setNextFocusableComponent(jValor_ext);
+        jValor.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                jValorFocusLost(evt);
+            }
+        });
 
         jValor_ext.setNextFocusableComponent(jPai);
 
@@ -407,7 +434,7 @@ public class Alunos extends javax.swing.JFrame {
             .addComponent(jSeparator1)
             .addComponent(jSeparator2)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap(27, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(btPesq_Av)
@@ -473,7 +500,7 @@ public class Alunos extends javax.swing.JFrame {
                         .addComponent(btVoltar)
                         .addGap(43, 43, 43)
                         .addComponent(btAnterior)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 54, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 75, Short.MAX_VALUE)
                         .addComponent(btProximo)
                         .addGap(43, 43, 43)
                         .addComponent(btLimpar)
@@ -483,7 +510,7 @@ public class Alunos extends javax.swing.JFrame {
                         .addComponent(btAlterar)
                         .addGap(43, 43, 43)
                         .addComponent(btExcluir)))
-                .addContainerGap())
+                .addContainerGap(29, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -517,11 +544,12 @@ public class Alunos extends javax.swing.JFrame {
                     .addComponent(jLabel14)
                     .addComponent(jMae, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel5)
-                    .addComponent(jEnd, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel15)
-                    .addComponent(jDt_Cad, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jDt_Cad, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(jLabel5)
+                        .addComponent(jEnd, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jLabel15)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel6)
@@ -572,11 +600,11 @@ public class Alunos extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
 
         pack();
@@ -598,9 +626,9 @@ public class Alunos extends javax.swing.JFrame {
     private void btPesqActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btPesqActionPerformed
         ResultSet rs;
         if("".equals(this.jPesquisa.getText())){
-            rs = this.taluno.Ler_Aluno(this.cbAluno.getSelectedItem().toString(), 1);
+            rs = this.taluno.Ler_Aluno(this.cbAluno.getSelectedItem().toString());
         }else{
-            rs = this.taluno.Ler_Aluno(this.jPesquisa.getText(), 1);
+            rs = this.taluno.Ler_Aluno(this.jPesquisa.getText());
         }
         if(rs !=null){
             try{
@@ -647,6 +675,24 @@ public class Alunos extends javax.swing.JFrame {
         Atualiza_Curso("0");
         Atualiza_Empresa("0");
         Atualiza_Und("0");
+        this.jPesquisa.setText("");
+        this.jCod.setText("00000");
+        this.jNome.setText("");
+        this.jEnd.setText("");
+        this.jFone.setText("");
+        this.jRg.setText("");
+        this.jCpf.setText("");
+        this.jObs.setText("");
+        this.jValor.setText("");
+        this.jValor_ext.setText("");
+        this.jPai.setText("");
+        this.jMae.setText("");
+        this.jDt_Vig.setText("");
+        this.jDt_Cad.setText(getDate());
+        this.cbCidade.setSelectedIndex(0);
+        this.cbUnd.setSelectedIndex(0);
+        this.cbEmpresa.setSelectedIndex(0);
+        this.cbCurso.setSelectedIndex(0);
     }//GEN-LAST:event_btLimparActionPerformed
 
     private void btGravarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btGravarActionPerformed
@@ -662,6 +708,27 @@ public class Alunos extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(null, "SELECIONE O ALUNO A SER ALTERADO", "Informacao", 1);
         }
     }//GEN-LAST:event_btAlterarActionPerformed
+
+    private void btPesq_AvActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btPesq_AvActionPerformed
+        try{
+            PesquisaAluno PA = new PesquisaAluno();
+            setVisible(false);
+            PA.setVisible(true);
+        } catch(Exception e){
+            System.out.println(e);
+        }
+    }//GEN-LAST:event_btPesq_AvActionPerformed
+
+    private void jValorFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jValorFocusLost
+/*        String preco = this.cons.corrige_valor(this.jValor.getText());
+        if(!"0".equals(preco)){
+            this.jValor.setText(preco);
+        }else{
+            JOptionPane.showMessageDialog(null, "VALOR PREENCHIDO DE FORMA INCORRETA", "Informacao", 1);
+            this.jValor.setText("");
+            this.jValor.requestFocus();
+        }*/
+    }//GEN-LAST:event_jValorFocusLost
 
     private String getDate(){
         DateFormat df = new SimpleDateFormat("dd/MM/yyyy");
@@ -689,7 +756,8 @@ public class Alunos extends javax.swing.JFrame {
                                                         String endereco = this.jEnd.getText();
                                                         String fone = this.cons.desmascaraTel(this.jFone.getText());
                                                         String obs = this.jObs.getText();
-                                                        String valor = this.cons.corrige_valor(this.jValor.getText());
+                                                        //String valor = this.cons.corrige_valor(this.jValor.getText());
+                                                        String valor = this.jValor.getText();
                                                         String valor_ext = this.jValor_ext.getText();
                                                         String pai = this.jPai.getText();
                                                         String mae = this.jMae.getText();

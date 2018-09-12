@@ -81,9 +81,9 @@ public class Menu extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void alunosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_alunosActionPerformed
-        Alunos alunos = new Alunos();
+        Alunos al = new Alunos();
         setVisible(false);
-        alunos.setVisible(true);
+        al.setVisible(true);
     }//GEN-LAST:event_alunosActionPerformed
 
     private void alunosKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_alunosKeyPressed
