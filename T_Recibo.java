@@ -19,7 +19,7 @@ import javax.swing.JOptionPane;
 public class T_Recibo {
     Tarefas_banco tarefas = new Tarefas_banco();
     
-    public void Grava_Rec(String rec, String compet_mes, String compet_ano,String cod_aluno, String data, String valor, String valor_ext){
+    public void Grava_Rec(String compet_mes, String compet_ano,String cod_aluno, String data, String valor, String valor_ext){
         try {
             this.tarefas.AbreConexao();
             
@@ -33,7 +33,7 @@ public class T_Recibo {
             String nom_aluno = rs2.getString("nom_aluno");
             String cpf = rs2.getString("cpf");
             String rg = rs2.getString("rg");
-            String sql = "insert into "+rec+" values (0,'"+compet_mes+"','"+compet_mes+"','"+cod_aluno+"','"+data+"','"+valor+"','"+valor_ext+"','"+nom_pref+"','"+respons+"','"+resp_cargo+"','"+lei_munic+"','"+nom_aluno+"','"+rg+"','"+cpf+"')";
+            String sql = "insert into tb_rec_pref values (0,'"+compet_mes+"','"+compet_mes+"','"+cod_aluno+"','"+data+"','"+valor+"','"+valor_ext+"','"+nom_pref+"','"+respons+"','"+resp_cargo+"','"+lei_munic+"','"+nom_aluno+"','"+rg+"','"+cpf+"')";
             
             int rs3 = this.tarefas.getSt().executeUpdate(sql);
             this.tarefas.FechaConexao();
@@ -93,10 +93,10 @@ public class T_Recibo {
         return null;
     }
     
-    public ResultSet Ler_Rec(String rec, String cod_aluno, String compet_mes, String compet_ano){
+    public ResultSet Ler_Rec(String cod_aluno, String compet_mes, String compet_ano){
         try {
             this.tarefas.AbreConexao();
-            String sql ="select * from "+rec+"where cod_aluno ='"+cod_aluno+"' and compet_rec='"+compet_mes+"' and compet_ano='"+compet_ano+"'";
+            String sql ="select * from tb_rec_pref where cod_aluno ='"+cod_aluno+"' and compet_rec='"+compet_mes+"' and compet_ano='"+compet_ano+"'";
             return this.tarefas.getSt().executeQuery(sql);
         } catch (IOException | SQLException ex) {
             JOptionPane.showMessageDialog(null, "NENHUM REGISTRO ENCONTRADO", "Informacao", 1);

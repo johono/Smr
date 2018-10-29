@@ -62,7 +62,7 @@ public class T_Curso {
             String sql = "select * from tb_cursos order by nome_curso";
             return this.tarefas.getSt().executeQuery(sql);
         } catch (IOException | SQLException ex) {
-            JOptionPane.showMessageDialog(null, "NENHUM REGISTRO ENCONTRADO.", "Informacao", 1);
+            JOptionPane.showMessageDialog(null, "NENHUM REGISTRO ENCONTRADO. TABELA CURSOS", "Informacao", 1);
         }
         try {
             this.tarefas.FechaConexao();
@@ -76,11 +76,11 @@ public class T_Curso {
         try {
             this.tarefas.AbreConexao();
             String sql;
-                sql = "select * from tb_curso where nome_curso ='" + curso + "' or cod_curso ='" + curso + "'";
+                sql = "select * from tb_cursos where nome_curso ='" + curso + "' or cod_curso ='" + curso + "'";
             
                 return this.tarefas.getSt().executeQuery(sql);
         } catch (IOException | SQLException ex) {
-            JOptionPane.showMessageDialog(null, "NENHUM REGISTRO ENCONTRADO", "Informacao", 1);
+            JOptionPane.showMessageDialog(null, "NENHUM REGISTRO ENCONTRADO. T_Curso ResultSet Ler_Curso(String curso)", "Informacao", 1);
         }
         try {
             this.tarefas.FechaConexao();

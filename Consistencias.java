@@ -172,7 +172,7 @@ public class Consistencias {
         }
     }
     
-    /*public String corrige_valor(String valor){
+    public String corrige_valor(String valor){
     String valor2="";
     StringBuilder sb = new StringBuilder();
     int teste2 = 0;
@@ -181,26 +181,26 @@ public class Consistencias {
     if(!"".equals(valor)){
     for (i = 0; i<valor.length();i++){
     int asc = valor.charAt(i);
-    if((asc<48)||(asc>57)){
+    if((asc < 48)||(asc > 57)){
     teste += 1;
     }
     if((",".equals(valor.substring(i, i+1)))||(".".equals(valor.substring(i, i+1)))){
-    valor2 = valor2+".";
-    teste-=1;
-    teste2+=1;
+    valor2 = valor2 + ".";
+    teste -= 1;
+    teste2 += 1;
     } else {
-    valor2 = valor2+valor2.substring(i, i+1);
+    valor2 = valor2 + valor.substring(i, i+1);
     }
     }
     }
-    if((teste>0)||(teste2>1)){
+    if((teste > 0)||(teste2 > 1)){
     return "0";
     }
     if(teste2 == 0){
-    return valor2 + "00";
+    return valor2 + ".00";
     }
     return valor2;
-    }*/
+    }
     }
     
 

@@ -12,6 +12,7 @@ package Rotinas;
 public class Parametros {
     
     private static String driver = "com.mysql.jdbc.Driver";
+    //private static String banco = "smr";
     private static String banco = "smreembolso";
     private static String host;
     private static String st_con;

@@ -56,15 +56,27 @@ public class T_Empresas {
         this.tar.FechaConexao();
         return null;
     }
-    public ResultSet Ler_Empresa(String empresa){    
+    public ResultSet Ler_Empresa(String empresa, int teste){    
         try {
             this.tar.AbreConexao();
             String sql;
+            /*sql = "select * from tb_empresas where razao_empresa = '"+empresa+"' or cod_empresa ='" +empresa+ "' or cnpj_empresa ='" +empresa + "'";
+            
+            return this.tar.getSt().executeQuery(sql);*/
+            if(teste == 1){
                 sql = "select * from tb_empresas where razao_empresa = '"+empresa+"' or cod_empresa ='" +empresa+ "' or cnpj_empresa ='" +empresa + "'";
-          
                 return this.tar.getSt().executeQuery(sql);
+            } else {
+                if(teste == 2){
+                    sql = "select * from tb_empresas where cod_empresa > '"+empresa+"'";
+                } else {
+                    sql = "select * from tb_empresas where cod_empresa < '"+empresa+"'";
+                }
+                return this.tar.getSt().executeQuery(sql);
+            }
+            
         } catch (IOException | SQLException ex) {
-            JOptionPane.showMessageDialog(null, "NENHUM REGISTRO ENCONTRADO", "Informacao", 1);
+            JOptionPane.showMessageDialog(null, "NENHUM REGISTRO ENCONTRADO. 3", "Informacao", 1);
         }
         this.tar.FechaConexao();
         return null;
