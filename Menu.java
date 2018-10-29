@@ -31,6 +31,11 @@ public class Menu extends javax.swing.JFrame {
 
         jPanel1 = new javax.swing.JPanel();
         alunos = new javax.swing.JButton();
+        empresas = new javax.swing.JButton();
+        unidades = new javax.swing.JButton();
+        cursos = new javax.swing.JButton();
+        cidades = new javax.swing.JButton();
+        jButton1 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -48,21 +53,92 @@ public class Menu extends javax.swing.JFrame {
             }
         });
 
+        empresas.setText("Cadastro de Empresas");
+        empresas.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                empresasActionPerformed(evt);
+            }
+        });
+        empresas.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                empresasKeyPressed(evt);
+            }
+        });
+
+        unidades.setText("Cadastro de Unidades");
+        unidades.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                unidadesActionPerformed(evt);
+            }
+        });
+        unidades.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                unidadesKeyPressed(evt);
+            }
+        });
+
+        cursos.setText("Cadastro de Cursos");
+        cursos.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cursosActionPerformed(evt);
+            }
+        });
+        cursos.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                cursosKeyPressed(evt);
+            }
+        });
+
+        cidades.setText("Cadastro de Cidades");
+        cidades.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cidadesActionPerformed(evt);
+            }
+        });
+        cidades.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                cidadesKeyPressed(evt);
+            }
+        });
+
+        jButton1.setText("Emissão de Recibos");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(alunos)
-                .addContainerGap(263, Short.MAX_VALUE))
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(empresas, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(alunos, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(cidades, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(cursos, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(unidades, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(249, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(alunos)
-                .addContainerGap(266, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(empresas)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(unidades)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(cursos)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(cidades)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jButton1)
+                .addContainerGap(121, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -91,6 +167,60 @@ public class Menu extends javax.swing.JFrame {
             alunosActionPerformed(null);
         }
     }//GEN-LAST:event_alunosKeyPressed
+
+    private void empresasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_empresasActionPerformed
+        Empresas e = new Empresas();
+        this.dispose();
+        e.setVisible(true);
+    }//GEN-LAST:event_empresasActionPerformed
+
+    private void unidadesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_unidadesActionPerformed
+        Unidades u = new Unidades();
+        this.dispose();
+        u.setVisible(true);
+    }//GEN-LAST:event_unidadesActionPerformed
+
+    private void cursosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cursosActionPerformed
+        Cursos c = new Cursos();
+        this.dispose();
+        c.setVisible(true);
+    }//GEN-LAST:event_cursosActionPerformed
+
+    private void cidadesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cidadesActionPerformed
+        Cidades c = new Cidades();
+        this.dispose();
+        c.setVisible(true);
+    }//GEN-LAST:event_cidadesActionPerformed
+
+    private void empresasKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_empresasKeyPressed
+        if(evt.getKeyCode() == KeyEvent.VK_ENTER){
+            empresasActionPerformed(null);
+        }
+    }//GEN-LAST:event_empresasKeyPressed
+
+    private void unidadesKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_unidadesKeyPressed
+        if(evt.getKeyCode() == KeyEvent.VK_ENTER){
+            unidadesActionPerformed(null);
+        }
+    }//GEN-LAST:event_unidadesKeyPressed
+
+    private void cursosKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_cursosKeyPressed
+        if(evt.getKeyCode() == KeyEvent.VK_ENTER){
+            cursosActionPerformed(null);
+        }
+    }//GEN-LAST:event_cursosKeyPressed
+
+    private void cidadesKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_cidadesKeyPressed
+        if(evt.getKeyCode() == KeyEvent.VK_ENTER){
+            cidadesActionPerformed(null);
+        }
+    }//GEN-LAST:event_cidadesKeyPressed
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        Recibos recibos = new Recibos();
+        this.dispose();
+        recibos.setVisible(true);
+    }//GEN-LAST:event_jButton1ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -129,6 +259,11 @@ public class Menu extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton alunos;
+    private javax.swing.JButton cidades;
+    private javax.swing.JButton cursos;
+    private javax.swing.JButton empresas;
+    private javax.swing.JButton jButton1;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JButton unidades;
     // End of variables declaration//GEN-END:variables
 }
