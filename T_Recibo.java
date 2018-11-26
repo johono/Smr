@@ -29,6 +29,7 @@ public class T_Recibo {
             String respons = rs1.getString("respons");
             String resp_cargo = rs1.getString("resp_cargo");
             String lei_munic = rs1.getString("lei_munic");
+            
             ResultSet rs2 = Ler_Aluno(cod_aluno);
             String nom_aluno = rs2.getString("nom_aluno");
             String cpf = rs2.getString("cpf");
@@ -93,10 +94,10 @@ public class T_Recibo {
         return null;
     }
     
-    public ResultSet Ler_Rec(String cod_aluno, String compet_mes, String compet_ano){
+    public ResultSet Ler_Rec(String rec, String cod_aluno, String compet_mes, String compet_ano){
         try {
             this.tarefas.AbreConexao();
-            String sql ="select * from tb_rec_pref where cod_aluno ='"+cod_aluno+"' and compet_rec='"+compet_mes+"' and compet_ano='"+compet_ano+"'";
+            String sql ="select * from "+ rec +" where cod_aluno ='"+cod_aluno+"' and compet_rec='"+compet_mes+"' and compet_ano='"+compet_ano+"'";
             return this.tarefas.getSt().executeQuery(sql);
         } catch (IOException | SQLException ex) {
             JOptionPane.showMessageDialog(null, "NENHUM REGISTRO ENCONTRADO", "Informacao", 1);

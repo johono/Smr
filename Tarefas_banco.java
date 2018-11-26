@@ -35,7 +35,7 @@ public class Tarefas_banco {
         } catch (ClassNotFoundException ex) {
             System.out.println("Erro ao realizar a conexão com o banco");
         } catch(SQLException ex){
-            JOptionPane.showMessageDialog(null, "USUÁRIO, SENHA OU SERVIDOR INCORRETO!", "Informacao", 1);
+            JOptionPane.showMessageDialog(null, "USUÁRIO, SENHA OU SERVIDOR INCORRETO! \n Tarefas_banco L38", "Informacao", 1);
         }        
     }
     public void FechaConexao(){
